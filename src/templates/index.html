@@ -5,10 +5,10 @@
 </head>
 <body>
     {% for chart_data in chart_data_list %}
-    <canvas id="{{chart_data['contract_address']|e}}" width="400" height="400"></canvas>
+    <canvas id="chart_{{chart_data['contract_address']|e}}" width="400" height="400"></canvas>
     <script>
-    const {{chart_data['contract_address']|e}}_ctx = document.getElementById('{{chart_data['contract_address']}}').getContext('2d');
-    const {{chart_data['contract_address']|e}}_nft_chart = new Chart({{chart_data['contract_address']|e}}_ctx, {
+    const ctx_{{chart_data['contract_address']|e}} = document.getElementById('chart_{{chart_data['contract_address']}}').getContext('2d');
+    const chart_{{chart_data['contract_address']|e}} = new Chart(ctx_{{chart_data['contract_address']|e}}, {
         type: 'line',
         data: {
             labels: {{chart_data["labels"]}},
