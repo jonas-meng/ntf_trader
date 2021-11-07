@@ -1,0 +1,4 @@
+.idea/
+db.json
+db.json.lock
+*.log
