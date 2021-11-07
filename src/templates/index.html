@@ -5,9 +5,7 @@
 </head>
 <body>
     {% for chart_data in chart_data_list %}
-    <div style="width:400px;height:400px">
-        <canvas id="{{chart_data['exchange']|e}}" width="400" height="400"></canvas>
-    </div>
+    <canvas id="{{chart_data['exchange']|e}}" width="400" height="400"></canvas>
     <script>
     const {{chart_data['exchange']|e}}_ctx = document.getElementById('{{chart_data['exchange']}}').getContext('2d');
     const {{chart_data['exchange']|e}}_nft_chart = new Chart({{chart_data['exchange']|e}}_ctx, {
