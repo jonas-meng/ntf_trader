@@ -12,7 +12,7 @@ def get_entries(exchange):
         "exchange": exchange
     })
     data = sorted(data, key=lambda x: x["timestamp"])
-    price_list = [item["data"]["price"] for item in data]
+    price_list = [float(item["data"]["price"]) for item in data]
     timestamps = [item["timestamp"] for item in data]
     return {
         "data": price_list,
