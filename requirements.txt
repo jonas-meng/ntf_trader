@@ -2,3 +2,4 @@ pysondb==1.5.6
 aiohttp
 cchardet
 aiodns
+flask
