@@ -6,7 +6,7 @@ async def track_lowest_price(session, params):
         "query": "\n        query getNftsMarketData($first: Int, $skip: Int!, $where: NFT_filter, $orderBy: NFT_orderBy, $orderDirection: OrderDirection) {\n          nfts(where: $where, first: $first, orderBy: $orderBy, orderDirection: $orderDirection, skip: $skip) {\n            \n  tokenId\n  metadataUrl\n  currentAskPrice\n  currentSeller\n  latestTradedPriceInBNB\n  tradeVolumeBNB\n  totalTrades\n  isTradable\n  updatedAt\n  otherId\n  collection {\n    id\n  }\n\n            transactionHistory {\n              \n  id\n  block\n  timestamp\n  askPrice\n  netPrice\n  withBNB\n  buyer {\n    id\n  }\n  seller {\n    id\n  }\n\n            }\n          }\n        }\n      ",
         "variables": {
             "where": {
-                "collection": "0x0a8901b0e25deb55a87524f0cc164e9644020eba",
+                "collection": params["collection"],
                 "isTradable": True
             },
             "first": 1,
@@ -37,6 +37,15 @@ async def track_lowest_price(session, params):
 job_params = [
     {
         "url": "https://api.thegraph.com/subgraphs/name/pancakeswap/nft-market",
-        "func": track_lowest_price
+        "func": track_lowest_price,
+        "collection": "0x0a8901b0e25deb55a87524f0cc164e9644020eba"
+    }, {
+        "url": "https://api.thegraph.com/subgraphs/name/pancakeswap/nft-market",
+        "func": track_lowest_price,
+        "collection": "0xdf7952b35f24acf7fc0487d01c8d5690a60dba07"
+    }, {
+        "url": "https://api.thegraph.com/subgraphs/name/pancakeswap/nft-market",
+        "func": track_lowest_price,
+        "collection": "0x3da8410e6ef658c06e277a2769816688c37496cf"
     }
 ]
