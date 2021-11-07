@@ -2,17 +2,19 @@ import asyncio
 import os.path
 
 import aiohttp
-import nftrade
-import pancakeswap
+from src import nftrade
+from src import pancakeswap
 
 from pysondb import db
 
-from logger_utility import create_logger
+from src.logger_utility import create_logger
 
 job_params = [*nftrade.job_params, *pancakeswap.job_params]
 
 logger = create_logger(__name__, os.path.realpath("ntf.log"))
 
+
+interval = 20
 
 async def main():
     while True:
@@ -23,7 +25,6 @@ async def main():
             nft_db.addMany(data_entries)
             logger.info(
                 f"job number {len(job_params)}, success job number {len(data_entries)}, failed job number {len(job_params) - len(data_entries)}")
-        interval = 10
         logger.info(f"sleep {interval} seconds")
         await asyncio.sleep(interval)
 
