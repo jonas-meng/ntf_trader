@@ -20,6 +20,7 @@ def get_entries(exchange):
         price_list = []
     timestamps = [item["timestamp"] for item in data]
     return {
+        "exchange": exchange,
         "data": price_list,
         "labels": timestamps
     }
@@ -27,7 +28,8 @@ def get_entries(exchange):
 
 @app.route("/")
 def index():
-    return render_template("index.html", **get_entries("pancakeswap"))
+    chart_data_list = [get_entries("nftrade"), get_entries("pancakeswap")]
+    return render_template("index.html", chart_data_list=chart_data_list)
 
 
 if __name__ == "__main__":
