@@ -4,14 +4,17 @@ import time
 
 async def track_lowest_price(session, params):
     async with session.get(params["url"]) as response:
-        if response.status == 200:
-            nft_data = await response.json()
-            return {
-                "exchange": "nftrade",
-                "timestamp": int(time.time()),
-                "data": nft_data[0]
-            }
-        else:
+        try:
+            if response.status == 200:
+                nft_data = await response.json()
+                return {
+                    "exchange": "nftrade",
+                    "timestamp": int(time.time()),
+                    "data": nft_data[0]
+                }
+            else:
+                return None
+        except Exception:
             return None
 
 

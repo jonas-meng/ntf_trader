@@ -23,14 +23,17 @@ async def track_lowest_price(session, params):
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36"
     }
     async with session.post(params["url"], json=payload, headers=headers) as response:
-        if response.status == 200:
-            nft_data = await response.json()
-            return {
-                "exchange": "pancakeswap",
-                "timestamp": int(time.time()),
-                "data": nft_data["data"]["nfts"][0]
-            }
-        else:
+        try:
+            if response.status == 200:
+                nft_data = await response.json()
+                return {
+                    "exchange": "pancakeswap",
+                    "timestamp": int(time.time()),
+                    "data": nft_data["data"]["nfts"][0]
+                }
+            else:
+                return None
+        except Exception:
             return None
 
 
